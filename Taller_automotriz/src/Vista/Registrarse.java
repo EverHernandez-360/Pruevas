@@ -4,12 +4,17 @@
  */
 package Vista;
 
+import Controlador.ControladorNuevocliente;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Ever Hernández
  */
 public class Registrarse extends javax.swing.JFrame {
-
+    private JTextField txtDpi, txtNombreCliente, txtNombreUsuario, txtContraseña;
+    private ControladorNuevocliente controlador;
     /**
      * Creates new form Registrarse
      */
@@ -31,13 +36,13 @@ public class Registrarse extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        txtdpi = new javax.swing.JTextField();
+        txtnombre = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtusuario = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtcontra = new javax.swing.JTextField();
         Confirmar = new javax.swing.JButton();
         registrarse = new javax.swing.JButton();
 
@@ -60,14 +65,14 @@ public class Registrarse extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("DPI");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, 30, -1));
-        jPanel1.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 290, -1));
-        jPanel1.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 290, -1));
+        jPanel1.add(txtdpi, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, 290, -1));
+        jPanel1.add(txtnombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 290, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Nombre completo");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 130, -1));
-        jPanel1.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 290, -1));
+        jPanel1.add(txtusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 290, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI Black", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(0, 0, 0));
@@ -78,7 +83,7 @@ public class Registrarse extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Contraseña");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 260, 140, -1));
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 290, -1));
+        jPanel1.add(txtcontra, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 280, 290, -1));
 
         Confirmar.setBackground(new java.awt.Color(205, 51, 51));
         Confirmar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
@@ -117,7 +122,20 @@ public class Registrarse extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
+        try {
+            // Obtener los valores de los campos
+            int dpi = Integer.parseInt(txtDpi.getText());
+            String nombreCliente = txtNombreCliente.getText();
+            String nombreUsuario = txtNombreUsuario.getText();
+            String contraseña = txtContraseña.getText();
 
+            // Llamar al controlador para registrar el cliente
+            controlador.registrarCliente(dpi, nombreCliente, nombreUsuario, contraseña);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "El DPI debe ser un número válido.");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Ocurrió un error: " + ex.getMessage());
+        }
     }//GEN-LAST:event_ConfirmarActionPerformed
 
     private void registrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarseActionPerformed
@@ -170,10 +188,10 @@ public class Registrarse extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JButton registrarse;
+    private javax.swing.JTextField txtcontra;
+    private javax.swing.JTextField txtdpi;
+    private javax.swing.JTextField txtnombre;
+    private javax.swing.JTextField txtusuario;
     // End of variables declaration//GEN-END:variables
 }
