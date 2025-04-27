@@ -26,6 +26,8 @@ public class Mo_Nuevosclientes {
         this.tipodecliente = tipodecliente;
     }
     
+    
+    
     public int getDpi() { return dpi; }
     public String getNombrecliente() { return nombrecliente; }
     public String getNombreusuario() { return nombreusuario; }
@@ -36,5 +38,30 @@ public class Mo_Nuevosclientes {
     public String toString() {
         return dpi + " - " + nombrecliente + " - " + nombreusuario + " - " + contraseña + " - " + tipodecliente;
     }
+    
+    public class Nuevosvehiculos {
+        
+        private String placa;
+        private String marca;
+        private String modelo;
+        private String imagen;
 
+        public Nuevosvehiculos(String placa, String marca, String modelo, String imagen){
+            this.placa = placa;
+            this.marca = marca;
+            this.modelo = modelo;
+            this.imagen = imagen;
+        }
+
+        public String getPlaca() { return placa; }
+        public String getMarca() { return marca; }
+        public String getModelo() { return modelo; }
+        public String getImagen() { return imagen; }
+
+
+        @Override
+        public String toString() {
+            return dpi + " - " + nombrecliente + " - " + nombreusuario + " - " + contraseña + " - " + tipodecliente + " - " + placa + " , " + marca + " , " + modelo + " , " + imagen;
+        }
+    }
 }

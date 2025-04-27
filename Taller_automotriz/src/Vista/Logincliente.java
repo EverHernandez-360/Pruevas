@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Vista;
+import Controlador.ControladorNuevocliente;
 import Modelo.Bitacora;
 import javax.swing.JOptionPane;
 /**
@@ -10,13 +11,14 @@ import javax.swing.JOptionPane;
  * @author Ever Hernández
  */
 public class Logincliente extends javax.swing.JFrame {
-
+private ControladorNuevocliente controlador;
     /**
      * Creates new form Login
      */
     public Logincliente() {
         initComponents();
         this.setLocationRelativeTo(null);
+        controlador = new ControladorNuevocliente();
     }
 
     /**
@@ -58,7 +60,7 @@ public class Logincliente extends javax.swing.JFrame {
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 110, 20));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
-        jLabel2.setText("Usuario");
+        jLabel2.setText("Cliente");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 80, 20));
 
         Tex_contra.addActionListener(new java.awt.event.ActionListener() {
@@ -104,7 +106,25 @@ public class Logincliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void InicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InicioActionPerformed
-    
+    try {
+            // Obtener datos ingresados por el usuario
+            String nombreUsuario = Tex_usu.getText(); // Cambia 'Tex_usu' por el nombre correcto
+            String contraseña = Tex_contra.getText(); // Cambia 'Tex_contra' por el nombre correcto
+
+            // Validar login
+            boolean loginValido = controlador.validarLogin(nombreUsuario, contraseña);
+
+            if (loginValido) {
+                Cliente panta1 = new Cliente();
+                panta1.setVisible(true);
+                Bitacora.General(nombreUsuario, "Preciono boton Confirmar", "Exio", "Ingreso a Clientes");
+            } else {
+                JOptionPane.showMessageDialog(this, "Error: Usuario o contraseña incorrectos.");
+                Bitacora.General("Desconocido", "Preciono boton Confirmar", "Error", " Usuario o contraseña incorrectos.");
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Ocurrió un error: " + ex.getMessage());
+        }                                          
     }//GEN-LAST:event_InicioActionPerformed
 
     private void Tex_contraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Tex_contraActionPerformed
@@ -119,6 +139,7 @@ public class Logincliente extends javax.swing.JFrame {
         Inicio panta1 = new Inicio();
         panta1.setVisible(true);
         this.setVisible(false);
+        Bitacora.General("Desconocido", "Preciono boton Regresar", "Exito", "Regreso a la pestana anterior");
     }//GEN-LAST:event_RegresarActionPerformed
 
     /**

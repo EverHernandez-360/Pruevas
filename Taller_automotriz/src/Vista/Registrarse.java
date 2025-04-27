@@ -5,6 +5,7 @@
 package Vista;
 
 import Controlador.ControladorNuevocliente;
+import Modelo.Bitacora;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -13,7 +14,6 @@ import javax.swing.JTextField;
  * @author Ever Hernández
  */
 public class Registrarse extends javax.swing.JFrame {
-    private JTextField txtDpi, txtNombreCliente, txtNombreUsuario, txtContraseña;
     private ControladorNuevocliente controlador;
     /**
      * Creates new form Registrarse
@@ -123,61 +123,38 @@ public class Registrarse extends javax.swing.JFrame {
 
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
         try {
-            // Obtener los valores de los campos
-            int dpi = Integer.parseInt(txtDpi.getText());
-            String nombreCliente = txtNombreCliente.getText();
-            String nombreUsuario = txtNombreUsuario.getText();
-            String contraseña = txtContraseña.getText();
+        // Obtener los valores ingresados por el usuario
+        int dpi = Integer.parseInt(txtdpi.getText()); 
+        String nombreCliente = txtnombre.getText(); 
+        String nombreUsuario = txtusuario.getText(); 
+        String contraseña = txtcontra.getText(); 
 
-            // Llamar al controlador para registrar el cliente
-            controlador.registrarCliente(dpi, nombreCliente, nombreUsuario, contraseña);
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "El DPI debe ser un número válido.");
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Ocurrió un error: " + ex.getMessage());
-        }
+        // Llamar al controlador para registrar el cliente
+        ControladorNuevocliente controlador = new ControladorNuevocliente();
+        controlador.registrarCliente(dpi, nombreCliente, nombreUsuario, contraseña);
+        
+        txtdpi.setText("");
+        txtnombre.setText("");
+        txtusuario.setText("");
+        txtcontra.setText("");
+    
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(this, "El DPI debe ser un número válido.");
+        Bitacora.General("Desconocido", "Preciono boton Confirmar", "Error", "En DPI ingreso letras o no lo lleno");
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "Ocurrió un error: " + ex.getMessage());
+    }
     }//GEN-LAST:event_ConfirmarActionPerformed
 
     private void registrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarseActionPerformed
-        Inicio panta1 = new Inicio();
-        panta1.setVisible(true);
-        this.setVisible(false); 
+     this.setVisible(false); 
+     Bitacora.General("Desconocido", "Preciono boton Regresar", "Error", "En DPI ingreso letras o no lo lleno");
     }//GEN-LAST:event_registrarseActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Registrarse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Registrarse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Registrarse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Registrarse.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Registrarse().setVisible(true);
-            }
-        });
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Confirmar;

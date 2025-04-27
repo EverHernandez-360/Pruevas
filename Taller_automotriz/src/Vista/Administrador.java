@@ -5,6 +5,7 @@
 package Vista;
 
 import Controlador.ControladorGeneral;
+import Modelo.Bitacora;
 
 /**
  *
@@ -18,6 +19,7 @@ private final ControladorGeneral controladorGeneral = new ControladorGeneral();
     public Administrador() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -32,9 +34,10 @@ private final ControladorGeneral controladorGeneral = new ControladorGeneral();
         jPanel1 = new javax.swing.JPanel();
         Repuestos = new javax.swing.JButton();
         Servicios = new javax.swing.JButton();
-        Repuestos2 = new javax.swing.JButton();
-        Repuestos3 = new javax.swing.JButton();
-        Repuestos4 = new javax.swing.JButton();
+        ClienteYAutomovil = new javax.swing.JButton();
+        ProgresoDeAuto = new javax.swing.JButton();
+        Reporte = new javax.swing.JButton();
+        cerrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,38 +68,49 @@ private final ControladorGeneral controladorGeneral = new ControladorGeneral();
         });
         jPanel1.add(Servicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, -1, 40));
 
-        Repuestos2.setBackground(new java.awt.Color(205, 51, 51));
-        Repuestos2.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        Repuestos2.setForeground(new java.awt.Color(255, 255, 255));
-        Repuestos2.setText("Cliente y automoviles");
-        Repuestos2.addActionListener(new java.awt.event.ActionListener() {
+        ClienteYAutomovil.setBackground(new java.awt.Color(205, 51, 51));
+        ClienteYAutomovil.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        ClienteYAutomovil.setForeground(new java.awt.Color(255, 255, 255));
+        ClienteYAutomovil.setText("Cliente y automoviles");
+        ClienteYAutomovil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Repuestos2ActionPerformed(evt);
+                ClienteYAutomovilActionPerformed(evt);
             }
         });
-        jPanel1.add(Repuestos2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 200, 30));
+        jPanel1.add(ClienteYAutomovil, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 200, 30));
 
-        Repuestos3.setBackground(new java.awt.Color(205, 51, 51));
-        Repuestos3.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        Repuestos3.setForeground(new java.awt.Color(255, 255, 255));
-        Repuestos3.setText("Progreso de autos");
-        Repuestos3.addActionListener(new java.awt.event.ActionListener() {
+        ProgresoDeAuto.setBackground(new java.awt.Color(205, 51, 51));
+        ProgresoDeAuto.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        ProgresoDeAuto.setForeground(new java.awt.Color(255, 255, 255));
+        ProgresoDeAuto.setText("Progreso de autos");
+        ProgresoDeAuto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Repuestos3ActionPerformed(evt);
+                ProgresoDeAutoActionPerformed(evt);
             }
         });
-        jPanel1.add(Repuestos3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, 190, 30));
+        jPanel1.add(ProgresoDeAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, 190, 30));
 
-        Repuestos4.setBackground(new java.awt.Color(205, 51, 51));
-        Repuestos4.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        Repuestos4.setForeground(new java.awt.Color(255, 255, 255));
-        Repuestos4.setText("Reportes");
-        Repuestos4.addActionListener(new java.awt.event.ActionListener() {
+        Reporte.setBackground(new java.awt.Color(205, 51, 51));
+        Reporte.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        Reporte.setForeground(new java.awt.Color(255, 255, 255));
+        Reporte.setText("Reportes");
+        Reporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Repuestos4ActionPerformed(evt);
+                ReporteActionPerformed(evt);
             }
         });
-        jPanel1.add(Repuestos4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 120, 30));
+        jPanel1.add(Reporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 120, 30));
+
+        cerrar.setBackground(new java.awt.Color(205, 51, 51));
+        cerrar.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        cerrar.setForeground(new java.awt.Color(255, 255, 255));
+        cerrar.setText("Cerrar sesion");
+        cerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cerrarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, 140, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,24 +131,32 @@ private final ControladorGeneral controladorGeneral = new ControladorGeneral();
     private void RepuestosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RepuestosActionPerformed
         Repuestos rep = new Repuestos(controladorGeneral);
         rep.setVisible(true);
+        Bitacora.General("Administrador", "Preciono boton Repuestos", "Exito", "ingresar datos");
     }//GEN-LAST:event_RepuestosActionPerformed
 
     private void ServiciosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ServiciosActionPerformed
         Servicios serv = new Servicios(controladorGeneral);
         serv.setVisible(true);
+        Bitacora.General("Administrador", "Preciono boton Servicios", "Exito", "ingresar datos");
     }//GEN-LAST:event_ServiciosActionPerformed
 
-    private void Repuestos2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Repuestos2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Repuestos2ActionPerformed
+    private void ClienteYAutomovilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClienteYAutomovilActionPerformed
+        Bitacora.General("Administrador", "Preciono boton Cliente y servicio", "Exito", "ver");
+    }//GEN-LAST:event_ClienteYAutomovilActionPerformed
 
-    private void Repuestos3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Repuestos3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Repuestos3ActionPerformed
+    private void ProgresoDeAutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProgresoDeAutoActionPerformed
+        Bitacora.General("Administrador", "Preciono boton progreso de auto", "Exito", "ver");
+    }//GEN-LAST:event_ProgresoDeAutoActionPerformed
 
-    private void Repuestos4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Repuestos4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Repuestos4ActionPerformed
+    private void ReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReporteActionPerformed
+        Bitacora.General("Administrador", "Preciono boton Reportes", "Exito", "ver");
+    }//GEN-LAST:event_ReporteActionPerformed
+
+    private void cerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarActionPerformed
+        Inicio panta1 = new Inicio();
+        panta1.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_cerrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -172,11 +194,12 @@ private final ControladorGeneral controladorGeneral = new ControladorGeneral();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ClienteYAutomovil;
+    private javax.swing.JButton ProgresoDeAuto;
+    private javax.swing.JButton Reporte;
     private javax.swing.JButton Repuestos;
-    private javax.swing.JButton Repuestos2;
-    private javax.swing.JButton Repuestos3;
-    private javax.swing.JButton Repuestos4;
     private javax.swing.JButton Servicios;
+    private javax.swing.JButton cerrar;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

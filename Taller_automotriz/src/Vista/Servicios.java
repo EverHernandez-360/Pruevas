@@ -6,6 +6,7 @@ package Vista;
 
 import Controlador.ControladorGeneral;
 import Controlador.ServicioControlador;
+import Modelo.Bitacora;
 import Modelo.Mo_inventario;
 import Modelo.Mo_repuestos;
 import Modelo.Mo_servicioInventario;
@@ -208,6 +209,7 @@ public class Servicios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Bt_regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_regresarActionPerformed
+        Bitacora.General("Administrador", "Preciono boton regresar", "Exito", "Regreso");
         this.setVisible(false);
     }//GEN-LAST:event_Bt_regresarActionPerformed
 
@@ -216,7 +218,8 @@ public class Servicios extends javax.swing.JFrame {
     }//GEN-LAST:event_RutaActionPerformed
 
     private void Bt_AbrirarchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_AbrirarchivoActionPerformed
-    JFileChooser fc = new JFileChooser();
+        Bitacora.General("Administrador", "Preciono boton abrir archivo", "Exito", "Ingreso el enlace");
+        JFileChooser fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);//Indicamos que abra solamente archivos
         
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("Archivos de texto", "txt", "tms");//Solamente acepta archivos de estas extenciones
@@ -242,12 +245,14 @@ public class Servicios extends javax.swing.JFrame {
     private void Bt_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_GuardarActionPerformed
          if (rutaArchivoActual == null) {
         JOptionPane.showMessageDialog(this, "Primero debes abrir un archivo.");
+        Bitacora.General("Administrador", "Preciono boton Guardar cambios", "Error", "No ingreso el archivo");
         return;
     }
 
     String contenido = Contenido.getText();
     if (contenido.isEmpty()) {
         JOptionPane.showMessageDialog(this, "No hay datos que guardar.");
+        Bitacora.General("Administrador", "Preciono boton Guardar cambios", "Error", "No ingreso el datos en el archivo");
         return;
     }
 
@@ -267,7 +272,7 @@ public class Servicios extends javax.swing.JFrame {
         }
 
         JOptionPane.showMessageDialog(this, resumen.toString());
-
+        Bitacora.General("Administrador", "Preciono boton Guardar cambios", "Exito", "Datos guardados");
     } catch (IOException e) {
         JOptionPane.showMessageDialog(this, "Error al guardar: " + e.getMessage());
     }
@@ -302,6 +307,7 @@ public class Servicios extends javax.swing.JFrame {
 
     if (nombre.isEmpty() || marca.isEmpty() || modelo.isEmpty() || listaRepuestos.isEmpty() || manoObraStr.isEmpty()) {
         JOptionPane.showMessageDialog(this, "⚠️ Todos los campos deben estar llenos.");
+        Bitacora.General("Administrador", "Preciono boton Agregar datos", "Error", "No lleno todos los campos");
         return;
     }
 
@@ -311,11 +317,15 @@ public class Servicios extends javax.swing.JFrame {
         String nuevaLinea = nombre + "-" + marca + "-" + modelo + "-" + listaRepuestos + "-" + preMano;
         Contenido.append(nuevaLinea + "\n");
 
-        Text1.setText(""); Text2.setText(""); Text3.setText("");
-        Text4.setText(""); Text5.setText("");
+        Text1.setText(""); 
+        Text2.setText(""); 
+        Text3.setText("");
+        Text4.setText(""); 
+        Text5.setText("");
 
     } catch (NumberFormatException e) {
         JOptionPane.showMessageDialog(this, "❌ Precio de mano de obra inválido.");
+        Bitacora.General("Administrador", "Preciono boton Guardar cambios", "Error", "No ingreso valor valido");
     }    
     }//GEN-LAST:event_Bt_agregarActionPerformed
  

@@ -12,6 +12,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import Modelo.Mo_inventario;
 import Controlador.RepuestoControlador;
+import Modelo.Bitacora;
 
 /**
  *
@@ -209,6 +210,7 @@ public class Repuestos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Bt_regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_regresarActionPerformed
+        Bitacora.General("Administrador", "Preciono boton Regresar", "Exito", "Ingreso el e");
         this.setVisible(false);
     }//GEN-LAST:event_Bt_regresarActionPerformed
 
@@ -217,6 +219,7 @@ public class Repuestos extends javax.swing.JFrame {
     }//GEN-LAST:event_RutaActionPerformed
 
     private void Bt_AbrirarchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_AbrirarchivoActionPerformed
+        Bitacora.General("Administrador", "Preciono boton abrir archivo", "Exito", "Ingreso el enlace");
         JFileChooser fc = new JFileChooser();
         fc.setFileSelectionMode(JFileChooser.FILES_ONLY);//Indicamos que abra solamente archivos
         
@@ -243,13 +246,14 @@ public class Repuestos extends javax.swing.JFrame {
     private void Bt_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_GuardarActionPerformed
         if (rutaArchivoActual == null) {
             JOptionPane.showMessageDialog(this, "Primero debes abrir un archivo.");
+            Bitacora.General("Administrador", "Preciono boton Guardar cambios", "Error", "No ingreso el archivo");
             return;
         }
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(rutaArchivoActual))) {
             writer.write(Contenido.getText());
             JOptionPane.showMessageDialog(this, "Archivo actualizado correctamente.");
-            
+            Bitacora.General("Administrador", "Preciono boton Guardar cambios", "Exito", "Ingreso los datos requeridos");
             controlador.actualizarInventarioDesdeTexto(Contenido.getText());
             
             System.out.println("Contenido en memoria:");
@@ -285,7 +289,8 @@ public class Repuestos extends javax.swing.JFrame {
     }//GEN-LAST:event_Text3ActionPerformed
 
     private void Bt_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bt_agregarActionPerformed
-        String nombre = Text1.getText().trim();
+    Bitacora.General("Administrador", "Preciono boton Agregar datos", "Exito", "Ingreso los datos al documento");
+    String nombre = Text1.getText().trim();
     String marca = Text2.getText().trim();
     String modelo = Text3.getText().trim();
     String existenciaStr = Text4.getText().trim();
@@ -294,6 +299,7 @@ public class Repuestos extends javax.swing.JFrame {
     // Validación básica
     if (nombre.isEmpty() || marca.isEmpty() || modelo.isEmpty() || existenciaStr.isEmpty() || precioStr.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Todos los campos deben estar llenos.");
+        Bitacora.General("Administrador", "Preciono boton Agregar datos", "Error", "No lleno todos los campos");
         return;
     }
 

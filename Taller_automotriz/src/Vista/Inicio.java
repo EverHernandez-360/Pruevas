@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Modelo.Bitacora;
+
 /**
  *
  * @author Ever Hernández
@@ -93,19 +95,21 @@ public class Inicio extends javax.swing.JFrame {
     private void AdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdministradorActionPerformed
         Login panta1 = new Login();
         panta1.setVisible(true);
-        this.setVisible(false);        
+        this.setVisible(false);
+        Bitacora.General("Desconocido", "Preciono boton Administrador", "Exito", "ingresar datos");        
     }//GEN-LAST:event_AdministradorActionPerformed
 
     private void ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClienteActionPerformed
         Logincliente panta1 = new Logincliente();
         panta1.setVisible(true);
         this.setVisible(false);
+        Bitacora.General("Desconocido", "Preciono boton Cliente", "Exito", "ingresar datos");
     }//GEN-LAST:event_ClienteActionPerformed
 
     private void registrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarseActionPerformed
         Registrarse panta1 = new Registrarse();
         panta1.setVisible(true);
-        this.setVisible(false);
+        Bitacora.General("Desconocido", "Preciono boton Registrarse", "Exito", "ingresar datos");
     }//GEN-LAST:event_registrarseActionPerformed
 
     /**
