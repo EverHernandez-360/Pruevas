@@ -54,7 +54,7 @@ private final ControladorGeneral controladorGeneral = new ControladorGeneral();
                 RepuestosActionPerformed(evt);
             }
         });
-        jPanel1.add(Repuestos, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 150, 40));
+        jPanel1.add(Repuestos, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 150, 40));
 
         Servicios.setBackground(new java.awt.Color(205, 51, 51));
         Servicios.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
@@ -66,40 +66,43 @@ private final ControladorGeneral controladorGeneral = new ControladorGeneral();
                 ServiciosActionPerformed(evt);
             }
         });
-        jPanel1.add(Servicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 110, -1, 40));
+        jPanel1.add(Servicios, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, -1, 40));
 
         ClienteYAutomovil.setBackground(new java.awt.Color(205, 51, 51));
         ClienteYAutomovil.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         ClienteYAutomovil.setForeground(new java.awt.Color(255, 255, 255));
+        ClienteYAutomovil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconocliyau.png"))); // NOI18N
         ClienteYAutomovil.setText("Cliente y automoviles");
         ClienteYAutomovil.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ClienteYAutomovilActionPerformed(evt);
             }
         });
-        jPanel1.add(ClienteYAutomovil, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, 200, 30));
+        jPanel1.add(ClienteYAutomovil, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 170, 240, 30));
 
         ProgresoDeAuto.setBackground(new java.awt.Color(205, 51, 51));
         ProgresoDeAuto.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         ProgresoDeAuto.setForeground(new java.awt.Color(255, 255, 255));
+        ProgresoDeAuto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconoprogreso.png"))); // NOI18N
         ProgresoDeAuto.setText("Progreso de autos");
         ProgresoDeAuto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ProgresoDeAutoActionPerformed(evt);
             }
         });
-        jPanel1.add(ProgresoDeAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 190, 190, 30));
+        jPanel1.add(ProgresoDeAuto, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 210, 30));
 
         Reporte.setBackground(new java.awt.Color(205, 51, 51));
         Reporte.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         Reporte.setForeground(new java.awt.Color(255, 255, 255));
+        Reporte.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconoreporte.png"))); // NOI18N
         Reporte.setText("Reportes");
         Reporte.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ReporteActionPerformed(evt);
             }
         });
-        jPanel1.add(Reporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 260, 120, 30));
+        jPanel1.add(Reporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 250, 140, 40));
 
         cerrar.setBackground(new java.awt.Color(205, 51, 51));
         cerrar.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N

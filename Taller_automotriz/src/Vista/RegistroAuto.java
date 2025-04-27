@@ -5,6 +5,19 @@
 package Vista;
 
 import Modelo.Bitacora;
+import Modelo.Mo_Nuevosclientes;
+import Modelo.Mo_Nuevosclientes.Nuevosvehiculos;
+import java.awt.Image;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.util.Vector;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,6 +25,9 @@ import Modelo.Bitacora;
  */
 public class RegistroAuto extends javax.swing.JFrame {
 private String nombreUsuario;
+private Vector<Nuevosvehiculos> listaVehiculos; // Vector para almacenar los automóviles
+private String rutaImagenSeleccionada; // Ruta de la imagen seleccionada
+
     /**
      * Creates new form RegistroAuto
      */
@@ -19,6 +35,9 @@ private String nombreUsuario;
         initComponents();
         this.setLocationRelativeTo(null);
         this.nombreUsuario = nombreUsuario;
+        this.nombreUsuario = nombreUsuario;
+        listaVehiculos = new Vector<>(); // Inicializar el vector
+        
     }
 
     /**
@@ -32,7 +51,6 @@ private String nombreUsuario;
 
         jPanel1 = new javax.swing.JPanel();
         btagregar = new javax.swing.JButton();
-        contenedorimagen = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         texplaca = new javax.swing.JTextField();
@@ -42,6 +60,7 @@ private String nombreUsuario;
         texmodelo = new javax.swing.JTextField();
         Regresar = new javax.swing.JButton();
         Ingresar = new javax.swing.JButton();
+        Lblimagen = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -58,19 +77,6 @@ private String nombreUsuario;
             }
         });
         jPanel1.add(btagregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 250, 150, 40));
-
-        javax.swing.GroupLayout contenedorimagenLayout = new javax.swing.GroupLayout(contenedorimagen);
-        contenedorimagen.setLayout(contenedorimagenLayout);
-        contenedorimagenLayout.setHorizontalGroup(
-            contenedorimagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-        contenedorimagenLayout.setVerticalGroup(
-            contenedorimagenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(contenedorimagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, 300, 300));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
@@ -116,6 +122,7 @@ private String nombreUsuario;
             }
         });
         jPanel1.add(Ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 350, 150, 40));
+        jPanel1.add(Lblimagen, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 30, 280, 300));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,7 +141,20 @@ private String nombreUsuario;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btagregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btagregarActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("Imágenes JPG", "jpg"));
+        int seleccion = fileChooser.showOpenDialog(this);
 
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+            rutaImagenSeleccionada = fileChooser.getSelectedFile().getAbsolutePath();
+            ImageIcon icon = new ImageIcon(rutaImagenSeleccionada);
+
+            // Escalar la imagen para ajustarla al tamaño del JLabel Lblimagen
+            Image image = icon.getImage().getScaledInstance(Lblimagen.getWidth(), Lblimagen.getHeight(), Image.SCALE_SMOOTH);
+
+            // Establecer la imagen en el JLabel Lblimagen
+            Lblimagen.setIcon(new ImageIcon(image));
+        }
     }//GEN-LAST:event_btagregarActionPerformed
 
     private void RegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegresarActionPerformed
@@ -144,9 +164,93 @@ private String nombreUsuario;
     }//GEN-LAST:event_RegresarActionPerformed
 
     private void IngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IngresarActionPerformed
-        // TODO add your handling code here:
+        try {
+            String placa = texplaca.getText();
+            String marca = texmarca.getText();
+            String modelo = texmodelo.getText();
+
+            if (placa.isEmpty() || marca.isEmpty() || modelo.isEmpty() || rutaImagenSeleccionada == null) {
+                JOptionPane.showMessageDialog(this, "Por favor, completa todos los campos y selecciona una imagen.");
+                return;
+            }
+
+            // Mover la imagen seleccionada al paquete Imagenes
+            String rutaDestinoImagen = moverImagen(rutaImagenSeleccionada);
+
+            // Crear un nuevo vehículo
+            Nuevosvehiculos vehiculo = new Mo_Nuevosclientes(0, "", "", "", "").new Nuevosvehiculos(placa, marca, modelo, rutaDestinoImagen);
+            listaVehiculos.add(vehiculo);
+
+            // Guardar datos en el archivo .tmca
+            guardarDatosEnArchivo();
+
+            JOptionPane.showMessageDialog(this, "Datos guardados correctamente.");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al guardar datos: " + e.getMessage());
+        }
     }//GEN-LAST:event_IngresarActionPerformed
 
+    private String moverImagen(String rutaOrigen) throws IOException {
+        // Crear la carpeta Imagenes si no existe
+        File carpetaImagenes = new File("src/Imagenes");
+        if (!carpetaImagenes.exists()) {
+            carpetaImagenes.mkdirs();
+        }
+
+        // Copiar la imagen al paquete Imagenes
+        File imagenOrigen = new File(rutaOrigen);
+        File imagenDestino = new File(carpetaImagenes, imagenOrigen.getName());
+        Files.copy(imagenOrigen.toPath(), imagenDestino.toPath(), StandardCopyOption.REPLACE_EXISTING);
+
+        // Retornar la ruta relativa de la imagen copiada
+        return "src/Imagenes/" + imagenOrigen.getName();
+    }
+
+    
+    private void guardarDatosEnArchivo() throws IOException {
+        String nombreArchivo = "C:\\Users\\Ever Hernández\\Desktop\\Clienteyautomovil.tmca";
+    try (BufferedWriter writer = new BufferedWriter(new FileWriter(nombreArchivo, true))) {
+
+        // Obtener información básica del cliente desde la sesión o campos
+        String identificador = "12345"; // Reemplazar por el identificador real del cliente
+        String nombreCompleto = "Ever Hernández"; // Reemplazar por el nombre real del cliente
+        String usuario = Bitacora.Sesion.getNombreUsuario(); // Obtener el nombre del usuario desde la sesión
+        String contrasena = "1234"; // Reemplazar por la contraseña real (si corresponde)
+        String tipoCliente = "Cliente Regular"; // O el tipo correspondiente
+
+        // Crear la línea base del cliente
+        String lineaCliente = identificador + "-" + nombreCompleto + "-" + usuario + "-" + contrasena + "-" + tipoCliente;
+
+        // Agregar información de los vehículos
+        StringBuilder vehiculosInfo = new StringBuilder(); // Para agregar múltiples vehículos
+        for (Nuevosvehiculos vehiculo : listaVehiculos) {
+            String datosVehiculo = vehiculo.getPlaca() + ","
+                    + vehiculo.getMarca() + ","
+                    + vehiculo.getModelo() + ","
+                    + vehiculo.getImagen();
+            if (vehiculosInfo.length() > 0) {
+                vehiculosInfo.append(";"); // Separador entre vehículos
+            }
+            vehiculosInfo.append(datosVehiculo);
+        }
+
+        // Línea final que se escribe en el archivo
+        String lineaFinal = lineaCliente + "-" + vehiculosInfo.toString();
+
+        // Escribir en el archivo
+        writer.write(lineaFinal);
+        writer.newLine();
+
+        // Limpiar la lista y los campos después de guardar
+        listaVehiculos.clear();
+        texplaca.setText("");
+        texmarca.setText("");
+        texmodelo.setText("");
+        rutaImagenSeleccionada = null;
+        Lblimagen.setIcon(null); // Limpiar la imagen del JLabel
+    }
+    
+    }
     /**
      * @param args the command line arguments
      */
@@ -184,9 +288,9 @@ private String nombreUsuario;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Ingresar;
+    private javax.swing.JLabel Lblimagen;
     private javax.swing.JButton Regresar;
     private javax.swing.JButton btagregar;
-    private javax.swing.JPanel contenedorimagen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

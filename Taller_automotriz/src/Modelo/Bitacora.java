@@ -18,4 +18,16 @@ public class Bitacora {
        
         System.out.println("[" + marcaTemporal + "] Usuario: " + usuario + " - Accion: " + accion + " - Resultado: " + resultado + " - Detalles: " + detalles);
     }
+    
+    public static class Sesion {
+        private static String nombreUsuario;
+
+        public static String getNombreUsuario() {
+            return nombreUsuario;
+        }
+
+        public static void setNombreUsuario(String nombreUsuario) {
+            Sesion.nombreUsuario = nombreUsuario;
+        }
+    }
 }

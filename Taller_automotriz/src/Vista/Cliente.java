@@ -5,7 +5,7 @@
 package Vista;
 
 import Modelo.Bitacora;
-
+import Modelo.Mo_Nuevosclientes;
 /**
  *
  * @author Ever Hernández
@@ -18,6 +18,12 @@ public class Cliente extends javax.swing.JFrame {
     public Cliente() {
         initComponents();
         this.setLocationRelativeTo(null);
+        String nombreUsuario = Bitacora.Sesion.getNombreUsuario();
+    if (nombreUsuario != null) {
+        Cliente.setText(nombreUsuario);
+    } else {
+        Cliente.setText("Usuario");
+    }
     }
 
     /**
@@ -35,6 +41,8 @@ public class Cliente extends javax.swing.JFrame {
         verprogreso = new javax.swing.JButton();
         factura = new javax.swing.JButton();
         cerrar = new javax.swing.JButton();
+        Cliente = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,46 +52,50 @@ public class Cliente extends javax.swing.JFrame {
         Registrodeauto.setBackground(new java.awt.Color(205, 51, 51));
         Registrodeauto.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         Registrodeauto.setForeground(new java.awt.Color(255, 255, 255));
+        Registrodeauto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconoregistro.png"))); // NOI18N
         Registrodeauto.setText("Registrar automovil");
         Registrodeauto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RegistrodeautoActionPerformed(evt);
             }
         });
-        jPanel1.add(Registrodeauto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 200, 40));
+        jPanel1.add(Registrodeauto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 240, 40));
 
         verauto.setBackground(new java.awt.Color(205, 51, 51));
         verauto.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         verauto.setForeground(new java.awt.Color(255, 255, 255));
+        verauto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconomiauto.png"))); // NOI18N
         verauto.setText("Ver mis automovil");
         verauto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 verautoActionPerformed(evt);
             }
         });
-        jPanel1.add(verauto, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 200, 40));
+        jPanel1.add(verauto, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 110, 230, 40));
 
         verprogreso.setBackground(new java.awt.Color(205, 51, 51));
         verprogreso.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         verprogreso.setForeground(new java.awt.Color(255, 255, 255));
+        verprogreso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconoprogreso.png"))); // NOI18N
         verprogreso.setText("Ver Progreso");
         verprogreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 verprogresoActionPerformed(evt);
             }
         });
-        jPanel1.add(verprogreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 230, 150, 40));
+        jPanel1.add(verprogreso, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 240, 180, 40));
 
         factura.setBackground(new java.awt.Color(205, 51, 51));
         factura.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
         factura.setForeground(new java.awt.Color(255, 255, 255));
+        factura.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/iconoreporte.png"))); // NOI18N
         factura.setText("Facturas");
         factura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 facturaActionPerformed(evt);
             }
         });
-        jPanel1.add(factura, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, 120, 40));
+        jPanel1.add(factura, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 240, 140, 40));
 
         cerrar.setBackground(new java.awt.Color(205, 51, 51));
         cerrar.setFont(new java.awt.Font("Segoe UI Semibold", 0, 18)); // NOI18N
@@ -95,6 +107,16 @@ public class Cliente extends javax.swing.JFrame {
             }
         });
         jPanel1.add(cerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, 150, 40));
+
+        Cliente.setFont(new java.awt.Font("Segoe UI Black", 0, 36)); // NOI18N
+        Cliente.setForeground(new java.awt.Color(0, 0, 0));
+        Cliente.setText(Bitacora.Sesion.getNombreUsuario());
+        jPanel1.add(Cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 240, 40));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 0, 36)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel2.setText("Bienvenido");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 30, 200, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,11 +139,13 @@ public class Cliente extends javax.swing.JFrame {
     private void RegistrodeautoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistrodeautoActionPerformed
         RegistroAuto panta1 = new RegistroAuto();
         panta1.setVisible(true);
-        Bitacora.General("Administrador", "Preciono boton Repuestos", "Exito", "ingresar datos");
+        Bitacora.General("Usuario", "Preciono boton Repuestos", "Exito", "ingresar datos");
     }//GEN-LAST:event_RegistrodeautoActionPerformed
 
     private void verautoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verautoActionPerformed
-        
+        Verautomovil panta1 = new Verautomovil();
+        panta1.setVisible(true);  
+        Bitacora.General("Usuario", "Preciono boton ver autos", "Exito", "ver datos");
     }//GEN-LAST:event_verautoActionPerformed
 
     private void verprogresoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_verprogresoActionPerformed
@@ -172,9 +196,11 @@ public class Cliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Cliente;
     private javax.swing.JButton Registrodeauto;
     private javax.swing.JButton cerrar;
     private javax.swing.JButton factura;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton verauto;
     private javax.swing.JButton verprogreso;

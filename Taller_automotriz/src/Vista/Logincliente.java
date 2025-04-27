@@ -115,6 +115,7 @@ private ControladorNuevocliente controlador;
             boolean loginValido = controlador.validarLogin(nombreUsuario, contraseña);
 
             if (loginValido) {
+                Bitacora.Sesion.setNombreUsuario(nombreUsuario);
                 Cliente panta1 = new Cliente();
                 panta1.setVisible(true);
                 Bitacora.General(nombreUsuario, "Preciono boton Confirmar", "Exio", "Ingreso a Clientes");
